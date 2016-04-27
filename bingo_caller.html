@@ -440,8 +440,10 @@ $(document).ready(function() {
   clearMain();
 });
 
-function clearMain () {
-  resetGameData();
+function clearMain (no_reset) {
+  if ( no_reset !== true ) {
+    resetGameData();
+  }
   populateContent('main_content');
 }
 
@@ -513,16 +515,16 @@ function initGameButtons() {
   } );
 
   $('#calls_on').change( function() {
-     game_data.calls_on = game_data.calls_on ? false : true;
+    game_data.calls_on = game_data.calls_on ? false : true;
   } );
 
   $('#default_ball_count').change( function() {
-     game_data.default_ball_count = game_data.default_ball_count ? false : true;
-     if ( ! game_data.default_ball_count ) {
-       $('#max_draw_select').removeClass('hidden');
-     } else {
-       $('#max_draw_select').addClass('hidden');
-     }
+    game_data.default_ball_count = game_data.default_ball_count ? false : true;
+    if ( ! game_data.default_ball_count ) {
+      $('#max_draw_select').removeClass('hidden');
+    } else {
+      $('#max_draw_select').addClass('hidden');
+    }
   } );
 
   $('#draw').click( function () { drawBall(); } );
@@ -557,12 +559,12 @@ function initGameButtons() {
   } );
 
   $('#begin_line').click( function () {
-    clearMain();
+    clearMain(true);
     populateContent(game_data, 'draw_number');
   } );
 
   $('#begin_fh').click( function () {
-    clearMain();
+    clearMain(true);
     game_data.calling_for_house = true;
     populateContent(game_data, 'draw_number');
   } );
